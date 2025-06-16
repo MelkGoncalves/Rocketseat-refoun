@@ -1,4 +1,7 @@
+const form = document.querySelector("form")
 const amount = document.getElementById("amount")
+const expense = document.getElementById("expense")
+const category = document.getElementById("category")
 
 
 amount.oninput = () => {
@@ -23,4 +26,31 @@ amount.oninput = () => {
     // Retorna o valor formatado
     return value
 
+}
+
+// Captura o evento de submit do formulário
+form.onsubmit = (event) => {
+    // Evita o comportamento padrão do formulário
+    event.preventDefault()
+
+    // Cria um novo objeto de despesa com os valores dos inputs
+    const newExpense = {
+        id: new Date().getTime(),
+        expense: expense.value,
+        category_id: category.value,
+        category_name: category.options[category.selectedIndex].text,
+        amount: amount.value,
+        created_at: new Date(),
+    }
+    // Chama a função que irá adicionar um item na lista de despesas
+    expenseAdd(newExpense)
+}
+
+function expenseAdd(newExpense) {
+    try {
+       
+    } catch (error) {
+        alert("Erro ao adicionar despesa: " + error.message)
+        console.log(error)
+    }
 }
